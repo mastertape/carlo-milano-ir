@@ -1,0 +1,134 @@
+send_hex:
+  name: Send Carlo Milano hex frame
+  description: Send a validated 9-byte Carlo Milano NX-7532 infrared frame through an infrared transmitter entity.
+  fields:
+    entity_id:
+      name: Infrared transmitter
+      required: true
+      selector:
+        entity:
+          domain: infrared
+    code:
+      name: Hex frame
+      description: Nine checksum-valid bytes, for example "55 D2 00 19 00 00 31 80 F1".
+      required: true
+      example: "55 D2 00 19 00 00 31 80 F1"
+      selector:
+        text:
+    repeat:
+      name: Repeat count
+      required: false
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 5
+          mode: box
+
+send_state:
+  name: Send Carlo Milano state
+  description: Build and send a supported v0.1 state for the Carlo Milano NX-7532-675.
+  fields:
+    entity_id:
+      name: Infrared transmitter
+      required: true
+      selector:
+        entity:
+          domain: infrared
+    power:
+      name: Power
+      required: false
+      default: true
+      selector:
+        boolean:
+    mode:
+      name: Mode
+      required: false
+      default: cool
+      selector:
+        select:
+          options:
+            - auto
+            - cool
+            - dry
+            - fan_only
+            - "off"
+    temperature:
+      name: Temperature
+      required: true
+      description: Celsius value 17-30 when temperature_unit is celsius, or Fahrenheit value 62-86 when temperature_unit is fahrenheit.
+      selector:
+        number:
+          min: 17
+          max: 86
+          mode: box
+    temperature_unit:
+      name: Temperature unit
+      required: false
+      default: celsius
+      selector:
+        select:
+          options:
+            - celsius
+            - fahrenheit
+    fan:
+      name: Fan
+      required: false
+      default: high
+      selector:
+        select:
+          options:
+            - low
+            - mid
+            - high
+    swing:
+      name: Vertical swing
+      required: false
+      default: false
+      selector:
+        boolean:
+    timer_hours:
+      name: Timer hours
+      description: Optional timer value from captured frames. Confirmed range is 0-24 hours.
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 24
+          unit_of_measurement: h
+          mode: box
+    repeat:
+      name: Repeat count
+      required: false
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 5
+          mode: box
+
+send_max_cool:
+  name: Send Carlo Milano max cool
+  description: Send the strongest confirmed remote-sendable cooling state, Cool 17 °C Fan High. This is not asserted to be the panel-only Super-Kuehlung mode.
+  fields:
+    entity_id:
+      name: Infrared transmitter
+      required: true
+      selector:
+        entity:
+          domain: infrared
+    swing:
+      name: Vertical swing
+      required: false
+      default: false
+      selector:
+        boolean:
+    repeat:
+      name: Repeat count
+      required: false
+      default: 0
+      selector:
+        number:
+          min: 0
+          max: 5
+          mode: box

@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Carlo Milano Compact 9000 BTU IR",
+        "description": "Set up the service domain for sending reverse-engineered Carlo Milano Compact 9000 BTU IR frames.",
+        "data": {
+          "entity_id": "Default infrared transmitter"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "invalid_hex_code": {
+      "message": "Invalid Carlo Milano hex frame: {error}"
+    },
+    "invalid_state": {
+      "message": "Invalid Carlo Milano state: {error}"
+    }
+  }
+}
