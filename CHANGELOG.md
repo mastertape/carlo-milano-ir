@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 This project follows a simple Keep a Changelog-style format.
 
+## [0.2.1] - 2026-06-29
+
+### Documentation
+
+- Added the smiling Compact 9000 BTU picon to the GitHub README.
+
+### Unchanged
+
+- No runtime behavior changed.
+
 ## [0.2.0] - 2026-06-29
 
 ### Documentation

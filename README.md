@@ -2,6 +2,8 @@
 
 ![Compact 9000 BTU IR](docs/hero.png)
 
+![Smiling Compact 9000 BTU AC picon](docs/picon.png)
+
 Home Assistant custom integration that adds a Compact 9000 BTU assumed-state
 climate entity and the `compact_9000_btu_ir` service domain for portable air
 conditioners controlled through Home Assistant's `infrared` entity platform.
