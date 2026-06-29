@@ -2,9 +2,10 @@
 
 ![Compact 9000 BTU IR](docs/hero.png)
 
-Home Assistant custom integration that adds a `carlo_milano_ir` service domain
-and an assumed-state climate entity for Compact 9000 BTU portable air
-conditioners controlled through Home Assistant's `infrared` entity platform.
+Home Assistant custom integration that adds a Compact 9000 BTU assumed-state
+climate entity and the technical `carlo_milano_ir` service domain for portable
+air conditioners controlled through Home Assistant's `infrared` entity
+platform.
 
 The confirmed test device is a PEARL / Carlo Milano NX-7532-675 with REV1_2016
 remote. The project is named around the broader Compact 9000 BTU white-label
@@ -20,7 +21,7 @@ used by IRremoteESP8266.
 This integration keeps the air-conditioner protocol knowledge in Home Assistant:
 
 1. A compatible IR blaster exposes a Home Assistant `infrared.*` transmitter.
-2. `carlo_milano_ir` builds Compact 9000 BTU IR frames.
+2. Compact 9000 BTU IR builds the IR frames.
 3. Home Assistant sends those frames through the configured infrared entity.
 
 It does not add AC-specific buttons to ESPHome YAML and does not
