@@ -31,16 +31,26 @@ class Compact9000BtuIrConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self._abort_if_unique_id_configured()
 
         if user_input is not None:
+            try:
+                user_input[CONF_ENTITY_ID] = _infrared_entity_id(user_input[CONF_ENTITY_ID])
+            except vol.Invalid:
+                return self.async_show_form(
+                    step_id="user",
+                    data_schema=self._schema(),
+                    errors={CONF_ENTITY_ID: "invalid_infrared_entity"},
+                )
             return self.async_create_entry(title=NAME, data=user_input)
 
-        schema = vol.Schema(
+        return self.async_show_form(step_id="user", data_schema=self._schema())
+
+    @staticmethod
+    def _schema() -> vol.Schema:
+        """Return a UI-serializable config flow schema."""
+        return vol.Schema(
             {
-                vol.Optional(CONF_ENTITY_ID, default=DEFAULT_EMITTER): (
-                    _infrared_entity_id
-                )
+                vol.Optional(CONF_ENTITY_ID, default=DEFAULT_EMITTER): cv.entity_id
             }
         )
-        return self.async_show_form(step_id="user", data_schema=schema)
 
     async def async_step_import(self, import_config):
         """Import YAML configuration."""

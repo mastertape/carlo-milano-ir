@@ -447,3 +447,24 @@ def test_command_repeat_replays_full_frame_after_gap() -> None:
     assert timings[: len(frame)] == frame
     assert timings[len(frame)] == -100000
     assert timings[len(frame) + 1 :] == frame
+
+
+def test_service_and_config_flow_schemas_are_ui_serializable() -> None:
+    """Custom validators stay out of HA schemas that the UI serializes."""
+    init_source = (PACKAGE_PATH / "__init__.py").read_text()
+    config_flow_source = (PACKAGE_PATH / "config_flow.py").read_text()
+
+    for schema_name in (
+        "SEND_HEX_SCHEMA",
+        "SEND_STATE_SCHEMA",
+        "SEND_MAX_COOL_SCHEMA",
+    ):
+        schema_block = init_source.split(f"{schema_name} = vol.Schema(", 1)[1].split(
+            ")\n\n", 1
+        )[0]
+        assert "_infrared_entity_id" not in schema_block
+        assert "cv.entity_id" in schema_block
+
+    flow_schema_block = config_flow_source.split("def _schema(", 1)[1]
+    assert "_infrared_entity_id" not in flow_schema_block.split("async def", 1)[0]
+    assert "cv.entity_id" in flow_schema_block

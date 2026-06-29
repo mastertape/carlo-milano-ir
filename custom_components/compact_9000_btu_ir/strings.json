@@ -16,6 +16,9 @@
     },
     "invalid_state": {
       "message": "Invalid Compact 9000 BTU state: {error}"
+    },
+    "invalid_infrared_entity": {
+      "message": "{entity_id} is not an infrared transmitter entity."
     }
   }
 }

@@ -57,6 +57,18 @@ def _infrared_entity_id(value: str) -> str:
     return entity_id
 
 
+def _ensure_infrared_entity_id(entity_id: str) -> str:
+    """Raise a Home Assistant service error for non-infrared emitters."""
+    try:
+        return _infrared_entity_id(entity_id)
+    except vol.Invalid as err:
+        raise ServiceValidationError(
+            translation_domain=DOMAIN,
+            translation_key="invalid_infrared_entity",
+            translation_placeholders={"entity_id": entity_id},
+        ) from err
+
+
 def _compact_9000_btu_hex_code(value: str) -> str:
     """Validate a Compact 9000 BTU capture hex code and keep the original string."""
     value = cv.string(value)
@@ -69,7 +81,7 @@ def _compact_9000_btu_hex_code(value: str) -> str:
 
 SEND_HEX_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_ENTITY_ID): _infrared_entity_id,
+        vol.Required(CONF_ENTITY_ID): cv.entity_id,
         vol.Required(CONF_CODE): _compact_9000_btu_hex_code,
         vol.Optional(CONF_REPEAT, default=0): vol.All(
             vol.Coerce(int), vol.Range(min=0, max=MAX_REPEAT)
@@ -79,7 +91,7 @@ SEND_HEX_SCHEMA = vol.Schema(
 
 SEND_STATE_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_ENTITY_ID): _infrared_entity_id,
+        vol.Required(CONF_ENTITY_ID): cv.entity_id,
         vol.Optional(CONF_POWER, default=True): cv.boolean,
         vol.Optional(CONF_MODE, default="cool"): vol.In(MODES),
         vol.Required(CONF_TEMPERATURE): vol.All(
@@ -100,7 +112,7 @@ SEND_STATE_SCHEMA = vol.Schema(
 
 SEND_MAX_COOL_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_ENTITY_ID): _infrared_entity_id,
+        vol.Required(CONF_ENTITY_ID): cv.entity_id,
         vol.Optional(CONF_SWING, default=False): cv.boolean,
         vol.Optional(CONF_REPEAT, default=0): vol.All(
             vol.Coerce(int), vol.Range(min=0, max=MAX_REPEAT)
@@ -138,7 +150,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
         await async_send_compact_9000_btu(
             hass,
-            call.data[CONF_ENTITY_ID],
+            _ensure_infrared_entity_id(call.data[CONF_ENTITY_ID]),
             state,
             repeat=call.data[CONF_REPEAT],
             context=call.context,
@@ -149,7 +161,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
         state = build_max_cool_state(swing=call.data[CONF_SWING])
         await async_send_compact_9000_btu(
             hass,
-            call.data[CONF_ENTITY_ID],
+            _ensure_infrared_entity_id(call.data[CONF_ENTITY_ID]),
             state,
             repeat=call.data[CONF_REPEAT],
             context=call.context,
@@ -176,7 +188,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
         await async_send_compact_9000_btu(
             hass,
-            call.data[CONF_ENTITY_ID],
+            _ensure_infrared_entity_id(call.data[CONF_ENTITY_ID]),
             state,
             repeat=call.data[CONF_REPEAT],
             context=call.context,

@@ -6,6 +6,18 @@ This project follows a simple Keep a Changelog-style format.
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-06-29
+
+### Fixed
+
+- Kept service and config-flow schemas UI-serializable by moving the custom
+  `infrared.*` entity check out of the Voluptuous schema and into handler/form
+  validation. This fixes Home Assistant's `Unable to convert schema:
+  <function _infrared_entity_id ...>` error when opening service/action UI
+  metadata.
+- Added a clear service/form error when the selected transmitter entity is not
+  an `infrared.*` entity.
+
 ### Documentation
 
 - Explained the purpose of `tests/test_compact_9000_btu_ir.py` in the README.
