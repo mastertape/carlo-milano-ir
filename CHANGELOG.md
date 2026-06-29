@@ -4,11 +4,27 @@ All notable changes to this project will be documented in this file.
 
 This project follows a simple Keep a Changelog-style format.
 
+## [0.2.2] - 2026-06-29
+
+### Fixed
+
+- Rebuilt the smiling Compact 9000 BTU picon from a clean source image so the
+  checkerboard background is no longer baked into the PNG.
+- Kept the picon small in the GitHub README heading instead of rendering it as a
+  large standalone image.
+- Updated the bundled entity picon and local HACS brand icon with real alpha
+  transparency.
+
+### Unchanged
+
+- No runtime behavior changed.
+
 ## [0.2.1] - 2026-06-29
 
 ### Documentation
 
-- Added the smiling Compact 9000 BTU picon to the GitHub README.
+- Added the smiling Compact 9000 BTU picon to the GitHub README heading.
+- Restored real transparency for the bundled picon PNG.
 
 ### Unchanged
 

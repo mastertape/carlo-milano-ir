@@ -1,8 +1,9 @@
-# Compact 9000 BTU IR for Home Assistant
+<h1>
+  <img src="docs/picon.png" alt="Smiling Compact 9000 BTU AC" width="42" />
+  Compact 9000 BTU IR for Home Assistant
+</h1>
 
 ![Compact 9000 BTU IR](docs/hero.png)
-
-![Smiling Compact 9000 BTU AC picon](docs/picon.png)
 
 Home Assistant custom integration that adds a Compact 9000 BTU assumed-state
 climate entity and the `compact_9000_btu_ir` service domain for portable air
