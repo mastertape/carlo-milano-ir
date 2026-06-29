@@ -10,5 +10,5 @@
   "issue_tracker": "https://github.com/mastertape/compact-9000-btu-ir/issues",
   "requirements": ["infrared-protocols>=3.2.0"],
   "single_config_entry": true,
-  "version": "0.2.3"
+  "version": "0.2.4"
 }

@@ -6,6 +6,15 @@ This project follows a simple Keep a Changelog-style format.
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-06-30
+
+### Fixed
+
+- Switched the config-flow transmitter field from `cv.entity_id` to Home
+  Assistant's `EntitySelector` filtered to the `infrared` domain. This fixes the
+  config-flow UI error `Unable to convert schema: <function entity_id ...>` on
+  Home Assistant 2026.6.
+
 ## [0.2.3] - 2026-06-29
 
 ### Fixed

@@ -467,4 +467,6 @@ def test_service_and_config_flow_schemas_are_ui_serializable() -> None:
 
     flow_schema_block = config_flow_source.split("def _schema(", 1)[1]
     assert "_infrared_entity_id" not in flow_schema_block.split("async def", 1)[0]
-    assert "cv.entity_id" in flow_schema_block
+    assert "cv.entity_id" not in flow_schema_block.split("async def", 1)[0]
+    assert "selector.EntitySelector" in flow_schema_block
+    assert "selector.EntitySelectorConfig(domain=INFRARED_DOMAIN)" in flow_schema_block

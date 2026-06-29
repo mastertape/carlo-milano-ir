@@ -8,6 +8,7 @@ from homeassistant import config_entries
 from homeassistant.components.infrared import DOMAIN as INFRARED_DOMAIN
 from homeassistant.const import CONF_ENTITY_ID
 from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers import selector
 
 from .const import DEFAULT_EMITTER, DOMAIN, NAME
 
@@ -48,7 +49,11 @@ class Compact9000BtuIrConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Return a UI-serializable config flow schema."""
         return vol.Schema(
             {
-                vol.Optional(CONF_ENTITY_ID, default=DEFAULT_EMITTER): cv.entity_id
+                vol.Optional(CONF_ENTITY_ID, default=DEFAULT_EMITTER): (
+                    selector.EntitySelector(
+                        selector.EntitySelectorConfig(domain=INFRARED_DOMAIN)
+                    )
+                )
             }
         )
 
