@@ -1,9 +1,9 @@
-"""Constants for the Carlo Milano IR integration."""
+"""Constants for the Compact 9000 BTU IR integration."""
 
 from __future__ import annotations
 
 DOMAIN = "carlo_milano_ir"
-NAME = "Carlo Milano Compact 9000 BTU IR"
+NAME = "Compact 9000 BTU IR"
 
 DEFAULT_EMITTER = "infrared.xiao_smart_ir_mate_ir_proxy_transmitter"
 PICON_URL_PATH = "/carlo_milano_ir/picon.png"

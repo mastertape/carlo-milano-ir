@@ -1,4 +1,4 @@
-"""Climate platform for Carlo Milano Compact 9000 BTU IR control."""
+"""Climate platform for Compact 9000 BTU IR control."""
 
 from __future__ import annotations
 
@@ -64,12 +64,12 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
-    """Set up the Carlo Milano climate entity from a config entry."""
+    """Set up the Compact 9000 BTU climate entity from a config entry."""
     async_add_entities([CarloMilanoClimate(entry)])
 
 
 class CarloMilanoClimate(RestoreEntity, ClimateEntity):
-    """Assumed-state climate entity for the IR-only Carlo Milano AC."""
+    """Assumed-state climate entity for the IR-only Compact 9000 BTU AC."""
 
     _attr_assumed_state = True
     _attr_entity_picture = PICON_URL_PATH
@@ -98,12 +98,12 @@ class CarloMilanoClimate(RestoreEntity, ClimateEntity):
     _attr_swing_modes = [SWING_OFF, SWING_VERTICAL]
 
     def __init__(self, entry: ConfigEntry) -> None:
-        """Initialize the Carlo Milano climate entity."""
+        """Initialize the Compact 9000 BTU climate entity."""
         self._attr_unique_id = "carlo_milano_compact_9000_btu_ac"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, "compact_9000_btu_ac")},
-            manufacturer="Carlo Milano / PEARL",
-            model="NX-7532 / Compact 9000 BTU",
+            manufacturer="Compact 9000 BTU platform",
+            model="Tested: PEARL / Carlo Milano NX-7532-675",
             name=NAME,
         )
         self._emitter_entity_id = entry.data.get(CONF_ENTITY_ID, DEFAULT_EMITTER)

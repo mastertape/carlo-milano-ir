@@ -1,35 +1,37 @@
-# Carlo Milano Compact 9000 BTU IR for Home Assistant
+# Compact 9000 BTU IR for Home Assistant
 
-![Carlo Milano Compact 9000 BTU IR](docs/hero.png)
+![Compact 9000 BTU IR](docs/hero.png)
 
 Home Assistant custom integration that adds a `carlo_milano_ir` service domain
-and an assumed-state climate entity for Carlo Milano / PEARL Compact 9000 BTU
-portable air conditioners controlled through Home Assistant's `infrared` entity
-platform.
+and an assumed-state climate entity for Compact 9000 BTU portable air
+conditioners controlled through Home Assistant's `infrared` entity platform.
 
-Tested device: Carlo Milano NX-7532-675 with REV1_2016 remote. Related-platform
-research covers Carlo Milano NX-7532, possible NX-7532-919 variants, electriQ
-Compact 9000 BTU / COMPACT-V2 candidates, and the `TROTEC_3550` protocol name
+The confirmed test device is a PEARL / Carlo Milano NX-7532-675 with REV1_2016
+remote. The project is named around the broader Compact 9000 BTU white-label
+platform so owners can find it even when their unit is branded differently.
+Search and compatibility terms intentionally include Carlo Milano, PEARL,
+electriQ Compact 9000 BTU / COMPACT-V2, and the `TROTEC_3550` protocol name
 used by IRremoteESP8266.
 
-[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=mastertape&repository=carlo-milano-ir&category=integration)
+[![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=mastertape&repository=compact-9000-btu-ir&category=integration)
 
 ## Design Goal
 
 This integration keeps the air-conditioner protocol knowledge in Home Assistant:
 
 1. A compatible IR blaster exposes a Home Assistant `infrared.*` transmitter.
-2. `carlo_milano_ir` builds Carlo Milano NX-7532 IR frames.
+2. `carlo_milano_ir` builds Compact 9000 BTU IR frames.
 3. Home Assistant sends those frames through the configured infrared entity.
 
-It does not add Carlo-Milano-specific buttons to ESPHome YAML and does not
+It does not add AC-specific buttons to ESPHome YAML and does not
 require a dedicated ESPHome action for each air-conditioner command.
 
 The protocol implementation is based on reverse-engineered Carlo Milano
-NX-7532-675 / REV1_2016 captures. IRremoteESP8266's `TROTEC_3550` implementation
-is used only as a compatibility cross-check for timing and bit-field hypotheses.
-This does not imply that Trotec is the manufacturer or origin of the Carlo
-Milano unit.
+NX-7532-675 / REV1_2016 captures and is exposed under a broader Compact 9000
+BTU name. IRremoteESP8266's `TROTEC_3550` implementation is used as a protocol
+compatibility cross-check for timing and bit-field hypotheses. This does not
+claim that Trotec is the manufacturer or origin of the tested Carlo Milano unit
+or of the wider white-label platform.
 
 ## Requirements
 
@@ -49,14 +51,14 @@ Confirmed with local captures:
 - REV1_2016 remote
 - v0.1 climate control through Home Assistant and HomeKit
 
-Likely related search targets that need community confirmation:
+Related search targets and candidates that need community confirmation:
 
 - Carlo Milano NX-7532
 - Carlo Milano NX-7532-919
 - electriQ Compact 9000 BTU
 - electriQ COMPACT-V2
 - Compact 9000 BTU white-label portable AC units with matching remote layout
-- IRremoteESP8266 `TROTEC_3550` compatible protocol devices
+- Trotec / TROTEC_3550 protocol-compatible devices, where proven by captures
 
 Please open an issue if you can confirm another brand/model with photos,
 manual links, type-plate data, or checksum-valid IR frames. See
@@ -71,9 +73,8 @@ useful.
 - `carlo_milano_ir.send_hex`
 - `carlo_milano_ir.send_state`
 - `carlo_milano_ir.send_max_cool`
-- Carlo Milano capture checksum validation.
-- Raw Home Assistant infrared timing generation based on the measured Carlo
-  Milano captures.
+- Compact 9000 BTU protocol checksum validation.
+- Raw Home Assistant infrared timing generation based on the measured Compact 9000 BTU captures.
 - Internal decode helpers for future receiver-side state sync.
 - Config-entry loading with YAML import, matching the Home Assistant 2026.6+
   loading pattern used by the current Z906 reference integration.
@@ -137,12 +138,14 @@ Confirmed from captures:
 - repeat gap: `100000` us
 - checksum: byte 8 is the sum of bytes 0 through 7 modulo 256
 
-Compatibility cross-check only: IRremoteESP8266 currently has an implementation
+Compatibility cross-check: IRremoteESP8266 currently has an implementation
 named `TROTEC_3550` whose timing constants and state layout match the captured
-Carlo Milano frames closely. The integration does not assert manufacturer or OEM
-origin from that name. The visually similar Trotec PAC 2100/2600 X product
-family should not be treated as a confirmed hardware twin of the Carlo Milano
-NX-7532.
+Compact 9000 BTU frames closely. This repository therefore keeps Trotec and
+`TROTEC_3550` visible in the README and compatibility notes for search and
+protocol archaeology. It does not assert manufacturer or OEM origin from that
+name. The visually similar Trotec PAC 2100/2600 X product family should not be
+treated as a confirmed physical hardware twin of the tested Carlo Milano
+NX-7532 without matching captures or documentation.
 
 The Carlo Milano manual `NX7532_11_158208.pdf` confirms the unit as
 `NX-7532-675`, PEARL/Carlo Milano, manual revision `REV1 - 04.01.2017`. It
@@ -259,12 +262,14 @@ does not claim to activate the panel-only Super-Kuehlung function from the
 manual; that behavior needs a separate power-meter comparison before it can be
 treated as identical.
 
-Related-platform research points to an electriQ Compact / COMPACT-V2 9000 BTU
-white-label family as a more plausible physical platform candidate than Trotec:
+Related-platform research currently points to an electriQ Compact / COMPACT-V2
+9000 BTU white-label family as a plausible physical platform candidate:
 compact cube body, top outlet, 9000 BTU / 2.6 kW class, and matching remote
-button layout have been reported. Until a public manual, type plate, or OEM
-document is archived with this repository, the integration keeps the protocol
-Carlo-Milano-first and does not name a Chinese manufacturer.
+button layout have been reported. The Trotec link remains important on the
+protocol side because of `TROTEC_3550`, but Trotec hardware compatibility is
+not treated as confirmed until a public manual, type plate, or checksum-valid
+capture is archived with this repository. The project does not name a Chinese
+manufacturer without evidence.
 
 ## Installation
 
@@ -274,20 +279,20 @@ through HACS once published.
 ### HACS
 
 When the repository is available in your HACS installation, search for
-**Carlo Milano NX-7532 IR** under HACS integrations, download it, and restart
+**Compact 9000 BTU IR** under HACS integrations, download it, and restart
 Home Assistant.
 
 For custom-repository installation, add:
 
 ```text
-https://github.com/mastertape/carlo-milano-ir
+https://github.com/mastertape/compact-9000-btu-ir
 ```
 
 as an integration repository in HACS.
 
 After installation, restart Home Assistant. Then add the integration from:
 
-Settings -> Devices & services -> Add integration -> Carlo Milano NX-7532 IR
+Settings -> Devices & services -> Add integration -> Compact 9000 BTU IR
 
 The integration also supports importing an existing YAML marker such as:
 
@@ -412,7 +417,7 @@ Home Assistant service action is explicitly called.
 Home Assistant 2026.6 added infrared receiver support. The current Home
 Assistant infrared API exposes receiver subscription via `async_subscribe_receiver`
 and provides received raw timings through `InfraredReceivedSignal`. This v0.1
-integration includes local decode helpers for Carlo Milano frames, but it does
+integration includes local decode helpers for Compact 9000 BTU frames, but it does
 not yet create a receiver-bound entity. Receiver-based remote-control state sync
 is planned for a later climate-entity version.
 

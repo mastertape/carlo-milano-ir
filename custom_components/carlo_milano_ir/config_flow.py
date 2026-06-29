@@ -1,4 +1,4 @@
-"""Config flow for Carlo Milano NX-7532 IR."""
+"""Config flow for Compact 9000 BTU IR."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ def _infrared_entity_id(value: str) -> str:
 
 
 class CarloMilanoIrConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Carlo Milano IR."""
+    """Handle a config flow for Compact 9000 BTU IR."""
 
     VERSION = 1
 

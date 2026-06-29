@@ -1,8 +1,8 @@
 # Compatibility And White-Label Research
 
-This integration is Carlo-Milano-first because the protocol was captured and
-tested on a PEARL / Carlo Milano NX-7532-675 portable air conditioner with the
-REV1_2016 remote.
+This integration is named for the broader Compact 9000 BTU platform while being
+confirmed first on a PEARL / Carlo Milano NX-7532-675 portable air conditioner
+with the REV1_2016 remote.
 
 The likely broader product family is a compact 9000 BTU white-label portable
 air-conditioner platform. Please treat the lists below as research status, not
@@ -29,9 +29,9 @@ community confirmation with photos, manuals, type plates, or IR captures.
 
 ## Protocol Search Terms
 
-The captured Carlo Milano state format matches the timing and field layout of
-the protocol known upstream as `TROTEC_3550` in IRremoteESP8266. This is a
-protocol compatibility reference only.
+The captured Compact 9000 BTU state format matches the timing and field layout
+of the protocol known upstream as `TROTEC_3550` in IRremoteESP8266. This is a
+protocol compatibility reference only, not a manufacturer claim.
 
 Useful search terms:
 
@@ -54,7 +54,8 @@ Useful search terms:
 
 Those Trotec names are useful for protocol archaeology because of the upstream
 `TROTEC_3550` label, but the known Trotec PAC device family should not be
-treated as a confirmed physical twin of the Carlo Milano NX-7532.
+treated as a confirmed physical twin of the tested Compact 9000 BTU unit without
+matching captures or documentation.
 
 ## Help Wanted
 

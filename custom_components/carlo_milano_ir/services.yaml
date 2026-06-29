@@ -1,6 +1,6 @@
 send_hex:
-  name: Send Carlo Milano hex frame
-  description: Send a validated 9-byte Carlo Milano NX-7532 infrared frame through an infrared transmitter entity.
+  name: Send Compact 9000 BTU hex frame
+  description: Send a validated 9-byte Compact 9000 BTU infrared frame through an infrared transmitter entity.
   fields:
     entity_id:
       name: Infrared transmitter
@@ -26,8 +26,8 @@ send_hex:
           mode: box
 
 send_state:
-  name: Send Carlo Milano state
-  description: Build and send a supported v0.1 state for the Carlo Milano NX-7532-675.
+  name: Send Compact 9000 BTU state
+  description: Build and send a supported v0.1 Compact 9000 BTU state, based on confirmed Carlo Milano / PEARL captures.
   fields:
     entity_id:
       name: Infrared transmitter
@@ -108,7 +108,7 @@ send_state:
           mode: box
 
 send_max_cool:
-  name: Send Carlo Milano max cool
+  name: Send Compact 9000 BTU max cool
   description: Send the strongest confirmed remote-sendable cooling state, Cool 17 °C Fan High. This is not asserted to be the panel-only Super-Kuehlung mode.
   fields:
     entity_id:

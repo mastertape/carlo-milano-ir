@@ -1,4 +1,4 @@
-"""Carlo Milano NX-7532 IR service integration."""
+"""Compact 9000 BTU IR service integration."""
 
 from __future__ import annotations
 
@@ -224,7 +224,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Carlo Milano Compact 9000 BTU IR from a config entry."""
+    """Set up Compact 9000 BTU IR from a config entry."""
     _LOGGER.info("Setting up %s config entry %s", DOMAIN, entry.entry_id)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     _LOGGER.info("Forwarded %s platforms: %s", DOMAIN, PLATFORMS)
